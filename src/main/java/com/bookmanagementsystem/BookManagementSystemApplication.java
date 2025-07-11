@@ -22,14 +22,22 @@ public class BookManagementSystemApplication {
 	public CommandLineRunner commandLineRunner(BookDAO bookDAO) {
 		return runner -> {
 			// Create book
-			createBook(bookDAO);
+			//createBook(bookDAO);
 
 			// Find book by id
-			findBookById(bookDAO);
+			//findBookById(bookDAO);
 
 			// List all books
-			listBooks(bookDAO);
+			//listBooks(bookDAO);
 
+			// Find Book by Author
+			//findBookByAuthor(bookDAO);
+
+			// Update book
+			//updateBook(bookDAO);
+
+			// Delete book
+			//deleteBook(bookDAO);
 
 		};
 	}
@@ -57,6 +65,41 @@ public class BookManagementSystemApplication {
 		for (Book b : books) {
 			System.out.println(b);
 		}
+	}
+
+	public void findBookByAuthor(BookDAO bookDAO) {
+		String authorName = "Ben Ski";
+
+		List<Book> books = bookDAO.findByAuthor(authorName);
+
+		if(books.isEmpty()) {
+			System.out.println("No books found for author: " + authorName);
+		} else {
+			for (Book b : books) {
+				System.out.println(b);
+			}
+		}
+	}
+
+	public void updateBook(BookDAO bookDAO) {
+		// Select what book to update
+		int bookId = 2;
+		Book theBook = bookDAO.findById(bookId);
+		if (theBook != null) {
+			System.out.println("Updating book...");
+			// setting new book title
+			theBook.setTitle("Updated title");
+			bookDAO.update(theBook);
+			System.out.println("Updated: " + theBook);
+		} else {
+			System.out.println("Book not found");
+		}
+	}
+
+	private void deleteBook(BookDAO bookDAO) {
+		int bookId = 2;
+		System.out.println("Deleted book with ID: " + bookId);
+		bookDAO.delete(bookId);
 	}
 
 }
