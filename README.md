@@ -19,7 +19,6 @@ This app demonstrates basic CRUD operations using the **EntityManager API** and 
 
 ## 📦 Setup
 
-### 1️⃣ Clone the repository
 ```
 git clone https://github.com/geloy-n/Basic-Book-Management-System-Springboot.git
 cd book-management-system
