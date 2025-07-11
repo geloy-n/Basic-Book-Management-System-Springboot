@@ -33,4 +33,24 @@ public class BookDAOImpl implements BookDAO {
         TypedQuery<Book> query = entityManager.createQuery("From Book", Book.class);
         return query.getResultList();
     }
+
+    @Override
+    public List<Book> findByAuthor(String author) {
+        TypedQuery<Book> query = entityManager.createQuery("from Book where author=:theAuthor", Book.class);
+        query.setParameter("theAuthor", author);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Book book) {
+        entityManager.merge(book);
+    }
+
+    @Override
+    @Transactional
+    public void delete(int id) {
+        Book book = entityManager.find(Book.class, id);
+        entityManager.remove(book);
+    }
 }
